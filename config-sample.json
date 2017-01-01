@@ -9,8 +9,10 @@
     "description": "Bla Bla Bla",
 
     "accessories": [{
-        "accessory": "Fake-RGB",
-        "name": "RGB Bulb"
+        "accessory": "Struct-RGB",
+        "name": "RGB Bulb",
+        "ip": "10.0.0.3",
+        "port": "6678"
     }],
 
     "platforms": []

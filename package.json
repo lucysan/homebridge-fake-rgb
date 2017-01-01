@@ -1,7 +1,7 @@
 {
-  "name": "homebridge-fake-rgb",
-  "version": "0.0.3",
-  "description": "Fake RGB Bulb plugin for homebridge: https://github.com/nfarina/homebridge",
+  "name": "homebridge-struct-rgb",
+  "version": "0.0.1",
+  "description": "Struct RGB Bulb plugin for homebridge: https://github.com/nfarina/homebridge",
   "license": "MIT",
   "keywords": [
     "homebridge-plugin"
@@ -11,13 +11,15 @@
     "homebridge": ">=0.2.0"
   },
   "author": {
-    "name": "Edgar Toll"
+    "name": "Luca Bernardi"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/edjopato/homebridge-fake-rgb.git"
+    "url": "https://github.com/lucysan/homebridge-struct-rgb"
   },
   "dependencies": {
-    "colorsys": "^1.0.9"
+    "colorsys": "^1.0.9",
+    "jspack": "^0.0.4",
+    "node-netcat": "^1.4.8"
   }
 }

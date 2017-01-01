@@ -1,22 +1,26 @@
-var colorsys = require( 'colorsys' );
+var colorsys = require('colorsys');
+var jspack = require('jspack').jspack;
+var netcat = require('node-netcat');
 var Service, Characteristic;
 
 module.exports = function( homebridge ) {
   Service = homebridge.hap.Service;
   Characteristic = homebridge.hap.Characteristic;
-  homebridge.registerAccessory( "homebridge-fake-rgb", "Fake-RGB", RgbAccessory );
+  homebridge.registerAccessory( "homebridge-struct-rgb", "Struct-RGB", RgbAccessory );
 };
 
 function RgbAccessory( log, config ) {
   this.log = log;
   this.config = config;
   this.name = config.name;
+  this.ip = config.ip;
+  this.port = config.port;
   this.power = 0;
   this.brightness = 100;
   this.saturation = 0;
   this.hue = 0;
 
-  this.log( "Initialized '" + this.name + "'" );
+  this.log( "Initialized '" + this.name + " - " + this.ip + ":" + this.port + "'" );
 }
 
 RgbAccessory.prototype.setColor = function() {
@@ -33,6 +37,13 @@ RgbAccessory.prototype.setColor = function() {
   }
 
   this.log( "set color to", color.r, color.g, color.b );
+
+  var data = jspack.Pack(">HHH", [color.r, color.g, color.b]);
+  var cl = netcat.client(this.port, this.ip); // Open connection to LED controller
+  cl.start();
+  cl.send(data, true); // 'true' closes connection after sending
+
+  this.log(data);
 };
 
 RgbAccessory.prototype.getServices = function() {
